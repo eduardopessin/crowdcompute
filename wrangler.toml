@@ -6,5 +6,5 @@ pages_build_output_dir = "./dist"
 binding = "DB"
 database_name = "crowdcompute"
 # Replace with the ID returned by `npx wrangler d1 create crowdcompute --jurisdiction eu`.
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "0f59216c-89a4-4c3c-a46e-54a575d57d97"
 migrations_dir = "migrations"

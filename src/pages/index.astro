@@ -13,6 +13,32 @@ const models = [
   ['community', 'Community decides'],
   ['other', 'Other'],
 ];
+
+let stats = {
+  target: 300,
+  committed: 1,
+  totalResponses: 1,
+  modelVotes: { glm: 1, kimi: 0, qwen: 0, community: 0, other: 0 } as Record<string, number>,
+};
+
+try {
+  const res = await fetch('https://crowdcompute.pages.dev/api/stats', {
+    signal: AbortSignal.timeout(4000),
+  });
+  if (res.ok) {
+    const data = (await res.json()) as typeof stats;
+    if (data && typeof data.committed === 'number') {
+      stats = data;
+    }
+  }
+} catch {
+  // Use fallback
+}
+
+const committedPercent = Math.min(
+  100,
+  Math.round((stats.committed / stats.target) * 100),
+);
 ---
 
 <Base>
@@ -144,21 +170,22 @@ const models = [
       <div class="progress-body">
         <div class="progress-label">
           <span>
-            <strong data-committed>—</strong>{' '}
-            <span class="muted">/ 300 interested</span>
+            <strong data-committed>{stats.committed.toLocaleString('en')}</strong>{' '}
+            <span class="muted">/ {stats.target} interested</span>
           </span>
           <span class="mono" data-progress-percent>
-            AWAITING DATA
+            {committedPercent}% OF TARGET
           </span>
         </div>
         <progress
           data-progress
-          max="300"
-          value="0"
+          max={stats.target}
+          value={Math.min(stats.committed, stats.target)}
           aria-label="Interested members out of 300"
+          aria-valuetext={`${stats.committed} of ${stats.target} interested`}
         ></progress>
         <p class="progress-note" data-stats-status>
-          Loading real community progress…
+          Only “Yes, at ~€59/month” responses count. Interest is not a purchase.
         </p>
       </div>
     </div>
@@ -251,6 +278,26 @@ const models = [
       </div>
     </div>
   </section>
+  <div class="thesis-section">
+    <div class="container">
+      <div class="thesis-box">
+        <p class="thesis-lead">
+          AI is becoming more capable — and more opaque.
+        </p>
+        <p class="thesis-body">
+          We increasingly rely on systems whose model version, system instructions,
+          alignment choices and retention policies we cannot see.
+        </p>
+        <p class="thesis-pivot">
+          CrowdCompute is an experiment in the opposite direction.
+        </p>
+        <p class="thesis-conclusion">
+          Less black box. More user control.
+        </p>
+      </div>
+    </div>
+  </div>
+
 
   <section id="cluster" class="section container">
     <div class="section-heading">
@@ -365,8 +412,8 @@ const models = [
           By design.
         </h3>
         <p>
-          Inference is planned on infrastructure hosted in Europe, with European
-          providers preferred.
+          Hosted in the EU, with an EU-based infrastructure provider as the
+          target.
         </p>
       </article>
       <article>
@@ -428,6 +475,15 @@ const models = [
           <li>Payment processing</li>
           <li>Operational reserve</li>
         </ul>
+      </div>
+      <div class="economic-disclaimer">
+        <span class="mono">WHY €59?</span>
+        <p>
+          It is a target based on the economics we believe committed 8×H200
+          capacity can reach in Europe. No infrastructure contract has been
+          signed yet. The cluster will only launch once the final economics are
+          sustainable.
+        </p>
       </div>
       <div class="economic-disclaimer">
         <span class="mono">THE FINE PRINT, UP FRONT.</span>
@@ -589,25 +645,34 @@ const models = [
           <span class="mono">LIVE VOTE</span>
         </div>
         <div class="vote-bars">
-          {models.map(([key, label]) => (
-            <div class="vote-row">
-              <div>
-                <span>{label}</span>
-                <strong class="mono" data-vote-label={key}>
-                  —
-                </strong>
+          {models.map(([key, label]) => {
+            const count = stats.modelVotes[key] || 0;
+            const percent = stats.totalResponses
+              ? Math.round((count / stats.totalResponses) * 100)
+              : 0;
+            return (
+              <div class="vote-row">
+                <div>
+                  <span>{label}</span>
+                  <strong class="mono" data-vote-label={key}>
+                    {percent}%
+                  </strong>
+                </div>
+                <progress
+                  data-vote={key}
+                  value={percent}
+                  max="100"
+                  aria-label={`${label} model preference`}
+                  aria-valuetext={`${percent}% from ${count} votes`}
+                ></progress>
               </div>
-              <progress
-                data-vote={key}
-                value="0"
-                max="100"
-                aria-label={`${label} model preference`}
-              ></progress>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <p class="vote-footnote" data-vote-status>
-          Loading community votes…
+          {stats.totalResponses
+            ? `${stats.totalResponses.toLocaleString('en')} responses · Anonymous aggregate totals · Percentages rounded`
+            : 'No votes yet. Help shape the first cluster.'}
         </p>
       </div>
     </div>
@@ -846,15 +911,18 @@ const models = [
           <div class="success-progress">
             <span class="mono">CURRENT PROGRESS</span>
             <strong>
-              <span data-committed>—</span> <small>/ 300</small>
+              <span data-committed>{stats.committed.toLocaleString('en')}</span> <small>/ {stats.target}</small>
             </strong>
             <progress
               data-progress
-              max="300"
-              value="0"
+              max={stats.target}
+              value={Math.min(stats.committed, stats.target)}
               aria-label="Current community progress"
+              aria-valuetext={`${stats.committed} of ${stats.target} interested`}
             ></progress>
-            <p data-stats-status class="small muted"></p>
+            <p data-stats-status class="small muted">
+              Only “Yes, at ~€59/month” responses count. Interest is not a purchase.
+            </p>
           </div>
           <h4>Help us reach 300.</h4>
           <p class="small muted">

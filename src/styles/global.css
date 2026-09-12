@@ -666,6 +666,41 @@ progress::-moz-progress-bar {
   color: #82966f;
   margin-right: 14px;
 }
+.thesis-section {
+  padding-block: 64px;
+  border-bottom: 1px solid var(--line);
+  background: #141812;
+}
+.thesis-box {
+  max-width: 680px;
+}
+.thesis-lead {
+  font-size: 26px;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.thesis-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.thesis-pivot {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #c9d4bf;
+  margin-bottom: 14px;
+}
+.thesis-conclusion {
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0;
+}
 .section {
   padding-block: 96px;
   border-bottom: 1px solid var(--line);

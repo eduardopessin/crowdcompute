@@ -1,0 +1,4 @@
+# Local development only. Official Cloudflare always-pass testing secret.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+# Accepted only on localhost / 127.0.0.1. Never enable in production.
+TURNSTILE_TEST_MODE=true

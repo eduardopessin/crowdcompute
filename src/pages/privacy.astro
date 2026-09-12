@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+const controller = import.meta.env.PUBLIC_PRIVACY_CONTROLLER;
+const contact = import.meta.env.PUBLIC_PRIVACY_CONTACT_EMAIL;
+---
+
+<Base
+  title="Privacy — CrowdCompute"
+  description="How CrowdCompute handles expressions of interest and model votes."
+>
+  <article class="container privacy-page">
+    <a class="text-link" href="/">
+      ← Back to CrowdCompute
+    </a>
+    <span class="eyebrow">YOUR INFORMATION</span>
+    <h1>Privacy, in plain language.</h1>
+    <p class="large-copy">
+      We collect a little information to find out whether this project should
+      exist.
+    </p>
+    <p class="small muted">
+      Last updated: 12 September 2026 · Consent version 2026-09-12
+    </p>
+    <h2>Who is behind this</h2>
+    <p>
+      CrowdCompute is an early-stage community AI compute initiative, not an
+      operating AI service.
+    </p>
+    {controller ? (
+      <p>
+        The organiser responsible for this signup data is{' '}
+        <strong>{controller}</strong>.
+      </p>
+    ) : (
+      <p class="privacy-notice">
+        The project organiser’s legal/controller identity must be added before
+        public signups open. No company legal entity is asserted here.
+      </p>
+    )}
+    {contact ? (
+      <p>
+        For privacy questions, access, corrections, deletion or withdrawing
+        consent, contact <a href={`mailto:${contact}`}>{contact}</a>.
+      </p>
+    ) : (
+      <p class="privacy-notice">
+        A monitored privacy contact must also be configured before collecting
+        public submissions.
+      </p>
+    )}
+    <p>
+      Complete legal and controller information, together with the commercial
+      service terms, will be provided before any commercial launch.
+    </p>
+    <h2>What we collect</h2>
+    <ul>
+      <li>Your email address and country.</li>
+      <li>Whether you would join at approximately €59/month.</li>
+      <li>Your primary use case and model preference.</li>
+      <li>Your optional comment, if you leave one.</li>
+      <li>
+        Your consent, its wording version, and submission/update timestamps.
+      </li>
+    </ul>
+    <p>
+      The application does not store IP addresses, browser fingerprints, payment
+      information or AI prompts and responses.
+    </p>
+    <h2>Why we collect it</h2>
+    <p>
+      We use this information to validate demand, understand intended uses,
+      guide the community model choice and contact you about CrowdCompute’s
+      launch. We rely on the consent you give when submitting the form. You can
+      withdraw it.
+    </p>
+    <p>
+      We do not sell the collected information. We do not use advertising
+      trackers, social tracking pixels or analytics cookies.
+    </p>
+    <h2>What is public</h2>
+    <p>
+      Only aggregate counts: total responses, the number answering “yes” at
+      approximately €59/month, and totals for each model preference. No
+      individual emails, countries, comments or votes are published. At very
+      small sample sizes, totals may indirectly reveal preferences; avoid
+      submitting sensitive information.
+    </p>
+    <h2>Storage and security checks</h2>
+    <p>
+      The site uses Cloudflare Pages, D1 and Turnstile. Cloudflare processes
+      technical request information to deliver the site and protect it against
+      abuse. This application does not copy that information into its signup
+      database. Turnstile’s security checks involve Cloudflare processing
+      technical browser data.
+    </p>
+    <p>
+      A necessary, random browser receipt cookie (<code>cc_receipt</code>) lasts
+      up to 180 days. It lets you update your existing response from the same
+      browser without an account. Only its cryptographic hash is stored
+      alongside your response. Losing the cookie means changes require
+      contacting the organiser; knowing an email alone cannot change its vote.
+    </p>
+    <p>
+      The intended European location of the future inference cluster is separate
+      from this signup site’s hosting. A European-jurisdiction D1 database
+      should be configured; Cloudflare’s global delivery and security services
+      still process requests. See{' '}
+      <a href="https://www.cloudflare.com/privacypolicy/" rel="noreferrer">
+        Cloudflare’s privacy policy
+      </a>
+      .
+    </p>
+    <h2>Retention and your choices</h2>
+    <p>
+      Signup records should be reviewed and deleted within 12 months of their
+      last update, or sooner if the project is abandoned or you withdraw
+      consent. The organiser must operate this retention process and handle
+      deletion requests, including applicable backup retention. You may request
+      access, correction or deletion using the privacy contact above.
+    </p>
+    <p>
+      Where applicable, you may also contact your local data protection
+      authority about how your data is handled.
+    </p>
+    <h2>No purchase. No service access yet.</h2>
+    <p>
+      This signup is an expression of interest only. It is not a binding
+      purchase, does not give you ownership of any physical GPUs and does not
+      give access to an AI service. No payments are collected.
+    </p>
+  </article>
+</Base>

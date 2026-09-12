@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.env*
+.dev.vars*
+package-lock.json
+test-results/
+playwright-report/
+public/og.png
+docs/*.png

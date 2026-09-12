@@ -1,0 +1,87 @@
+---
+import '../styles/fonts.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'CrowdCompute — Community-funded European AI compute',
+  description = 'Pool demand to run frontier open-weight AI on dedicated European compute.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10120f" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CrowdCompute" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://crowdcompute.eu/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="300 people. 8 H200s. One European AI cluster. CrowdCompute EU-01."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://crowdcompute.eu/og.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <div class="container nav-inner">
+        <a class="wordmark" href="/" aria-label="CrowdCompute / EU home">
+          <span class="brand-mark" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          CrowdCompute<span class="wordmark-eu">/ EU</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="/#idea">The idea</a>
+          <a href="/#economics">Economics</a>
+          <a class="nav-cta" href="/#reserve">
+            Reserve my seat <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer container">
+      <div class="footer-top">
+        <a class="wordmark" href="/">
+          CrowdCompute<span class="wordmark-eu">/ EU</span>
+        </a>
+        <p>Big compute. Shared ambition.</p>
+        <a href="/privacy/">
+          Privacy <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <span>A European AI infrastructure initiative.</span>
+        <span>Expression of interest only. No payments. No GPU ownership.</span>
+        <a href="#main">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>

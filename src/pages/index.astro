@@ -1,0 +1,885 @@
+---
+import Base from '../layouts/Base.astro';
+import { countryCodes } from '../lib/countries';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const countries = countryCodes
+  .map((code) => ({ code, name: countryNames.of(code) || code }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+const models = [
+  ['glm', 'GLM'],
+  ['kimi', 'Kimi'],
+  ['qwen', 'Qwen'],
+  ['community', 'Community decides'],
+  ['other', 'Other'],
+];
+---
+
+<Base>
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero-topline">
+      <span class="eyebrow">
+        <span class="signal-dot"></span> Independent minds. Shared
+        infrastructure.
+      </span>
+      <span class="mono hero-location">EUROPE · CLUSTER 001</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 id="hero-title">
+          <span>300 people.</span>
+          <br />8 H200s.
+          <br />
+          One European
+          <br />
+          AI cluster<span class="accent">.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Pool our demand to run frontier open-weight AI on dedicated European
+          compute.
+        </p>
+        <p class="hero-support">
+          Instead of each of us buying expensive GPUs or sending our code and
+          data to proprietary AI providers, we collectively fund dedicated AI
+          infrastructure in Europe.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#reserve">
+            Reserve my seat <span aria-hidden="true">↗</span>
+          </a>
+          <a class="text-link" href="#idea">
+            How it works <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <p class="hero-terms">
+          <strong>Target price: ~€59/month</strong>
+          <span>No payment today. No binding commitment.</span>
+        </p>
+      </div>
+      <div
+        class="cluster-visual"
+        role="img"
+        aria-label="Proposed EU-01 cluster: eight NVIDIA H200 GPUs connected by NVLink. Configuration illustration, not a live system."
+      >
+        <div class="visual-top">
+          <span class="mono">EU-01 / COMPUTE ARRAY</span>
+          <span class="visual-status">PROPOSED</span>
+        </div>
+        <div class="hardware-stage">
+          <div class="rack-frame">
+            <div class="rack-header">
+              <span class="rack-dot"></span>
+              <span class="mono">NVIDIA H200 SXM</span>
+              <span class="mono">× 08</span>
+            </div>
+            <div class="gpu-grid">
+              {Array.from({ length: 8 }, (_, i) => (
+                <div class="gpu-module">
+                  <div class="gpu-number mono">
+                    GPU / 0{i + 1}
+                    <span>141 GB</span>
+                  </div>
+                  <div class="chip-row">
+                    <div class="chip">
+                      <span>H200</span>
+                    </div>
+                    <div class="heat-sink">
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </div>
+                  </div>
+                  <div class="module-pins"></div>
+                </div>
+              ))}
+            </div>
+            <div class="nvlink">
+              <span></span>
+              <b class="mono">NVLINK INTERCONNECT</b>
+              <span></span>
+            </div>
+          </div>
+          <span class="technical-corner corner-tl"></span>
+          <span class="technical-corner corner-br"></span>
+        </div>
+        <div class="visual-metrics">
+          <div>
+            <strong>
+              1.1 <span>TB</span>
+            </strong>
+            <span class="mono">APPROX. HBM</span>
+          </div>
+          <div>
+            <strong>
+              8<span> × H200</span>
+            </strong>
+            <span class="mono">ONE SHARED CLUSTER</span>
+          </div>
+        </div>
+        <div class="visual-footer mono">
+          <span>
+            <span class="eu-stars" aria-hidden="true">
+              ✳
+            </span>{' '}
+            EUROPEAN COMPUTE
+          </span>
+          <span>SCHEMATIC / NOT LIVE</span>
+        </div>
+      </div>
+    </div>
+    <div class="progress-panel" role="group" aria-label="Community progress">
+      <div class="progress-title">
+        <span class="signal-dot"></span>
+        <div>
+          <strong>Founding Cluster EU-01</strong>
+          <span>From collective interest to dedicated compute.</span>
+        </div>
+      </div>
+      <div class="progress-body">
+        <div class="progress-label">
+          <span>
+            <strong data-committed>—</strong>{' '}
+            <span class="muted">/ 300 interested</span>
+          </span>
+          <span class="mono" data-progress-percent>
+            AWAITING DATA
+          </span>
+        </div>
+        <progress
+          data-progress
+          max="300"
+          value="0"
+          aria-label="Interested members out of 300"
+        ></progress>
+        <p class="progress-note" data-stats-status>
+          Loading real community progress…
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="principles-strip">
+    <div class="container">
+      <span>OPEN-WEIGHT MODELS</span>
+      <span>EUROPEAN COMPUTE</span>
+      <span>PRIVACY BY DESIGN</span>
+      <span>COMMUNITY CHOICE</span>
+    </div>
+  </div>
+
+  <section id="idea" class="section container">
+    <div class="section-heading">
+      <span class="eyebrow section-index">01 / THE IDEA</span>
+      <div>
+        <h2>
+          Compute is expensive.
+          <br />
+          <span class="muted">It doesn’t have to be lonely.</span>
+        </h2>
+        <p>
+          One person renting an 8×H200 server makes little economic sense.
+          Hundreds of people sharing one does.
+        </p>
+      </div>
+    </div>
+    <div class="idea-grid">
+      <div class="idea-copy">
+        <p class="large-copy">
+          Don’t buy another subscription to a black box. Help build an
+          alternative.
+        </p>
+        <p>
+          CrowdCompute brings people with the same need together: capable,
+          open-weight AI on infrastructure we can understand.
+        </p>
+        <p>
+          The proposal is simple. Pool a monthly budget, fund a dedicated
+          cluster in Europe, and share its capacity. Members fund access to
+          infrastructure; they do not own the physical GPUs.
+        </p>
+        <a class="text-link" href="#economics">
+          See the numbers <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div
+        class="flow-diagram"
+        role="group"
+        aria-label="Individual users pool demand through CrowdCompute to fund a dedicated eight H200 cluster running an open-weight frontier model"
+      >
+        <div class="flow-users">
+          <span>DEVELOPERS</span>
+          <span>BUILDERS</span>
+          <span>TEAMS</span>
+        </div>
+        <div class="flow-line" aria-hidden="true">
+          ↓
+        </div>
+        <div class="flow-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          CrowdCompute
+        </div>
+        <div class="flow-line" aria-hidden="true">
+          ↓
+        </div>
+        <div class="flow-cluster">
+          <span class="mini-chips" aria-hidden="true">
+            ▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥
+          </span>
+          <strong>Dedicated 8×H200 cluster</strong>
+          <span class="mono">HOSTED IN EUROPE</span>
+        </div>
+        <div class="flow-line" aria-hidden="true">
+          ↓
+        </div>
+        <div class="flow-model">
+          Open-weight frontier model{' '}
+          <span class="accent" aria-hidden="true">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cluster" class="section container">
+    <div class="section-heading">
+      <span class="eyebrow section-index">02 / FIRST CLUSTER</span>
+      <div>
+        <h2>Meet the starting point.</h2>
+        <p>Serious hardware. A shared purpose.</p>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-identity">
+        <div class="eyebrow">
+          <span class="signal-dot"></span> PROPOSED CONFIGURATION
+        </div>
+        <strong>
+          EU<span>–</span>01
+        </strong>
+        <p>
+          Built around the compute.
+          <br />
+          Not locked to a model.
+        </p>
+        <span class="spec-bottom mono">FOUNDING CLUSTER / EUROPE</span>
+      </div>
+      <div class="spec-details">
+        <dl>
+          <div>
+            <dt>ACCELERATORS</dt>
+            <dd>8 × NVIDIA H200</dd>
+          </div>
+          <div>
+            <dt>MEMORY</dt>
+            <dd>~1.1 TB HBM</dd>
+          </div>
+          <div>
+            <dt>INTERCONNECT</dt>
+            <dd>NVLink</dd>
+          </div>
+          <div>
+            <dt>LOCATION</dt>
+            <dd>European datacenter</dd>
+          </div>
+          <div>
+            <dt>OPERATION</dt>
+            <dd>
+              24/7 operation <small>planned</small>
+            </dd>
+          </div>
+          <div>
+            <dt>MODEL</dt>
+            <dd>Community selected</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="model-note">
+      <h3>
+        The compute stays.
+        <br />
+        <span class="accent">The model can change.</span>
+      </h3>
+      <div>
+        <p>
+          Potential candidates include <strong>GLM, Kimi, Qwen</strong> and
+          other frontier open-weight models. Fund the infrastructure, then
+          choose the model that serves the community best.
+        </p>
+        <p class="small muted">
+          Candidates are subject to licensing, memory requirements and
+          deployment testing. No specific model is guaranteed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section container">
+    <div class="section-heading">
+      <span class="eyebrow section-index">03 / OUR PRINCIPLES</span>
+      <div>
+        <h2>
+          Less black box.
+          <br />
+          More common ground.
+        </h2>
+        <p>The commitments we intend to build the service around.</p>
+      </div>
+    </div>
+    <div class="principle-cards">
+      <article>
+        <span class="card-icon" aria-hidden="true">
+          [ ∅ ]
+        </span>
+        <span class="eyebrow">PRIVATE</span>
+        <h3>
+          Your prompts.
+          <br />
+          Your business.
+        </h3>
+        <p>
+          No prompt or response retention by default in the planned inference
+          service. Privacy belongs in the architecture.
+        </p>
+      </article>
+      <article>
+        <span class="card-icon european-icon" aria-hidden="true">
+          ✳
+        </span>
+        <span class="eyebrow">EUROPEAN</span>
+        <h3>
+          Closer to home.
+          <br />
+          By design.
+        </h3>
+        <p>
+          Inference is planned on infrastructure hosted in Europe, with European
+          providers preferred.
+        </p>
+      </article>
+      <article>
+        <span class="card-icon" aria-hidden="true">
+          [ ≡ ]
+        </span>
+        <span class="eyebrow">TRANSPARENT</span>
+        <h3>
+          Know what
+          <br />
+          you’re funding.
+        </h3>
+        <p>
+          Infrastructure cost, cluster utilization and available capacity will
+          be visible to members.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="economics" class="economics-section">
+    <div class="container section">
+      <div class="section-heading">
+        <span class="eyebrow section-index">04 / OPEN ECONOMICS</span>
+        <div>
+          <h2>
+            A simple equation.
+            <br />A different kind of scale.
+          </h2>
+          <p>The initial hypothesis. Every euro has a job.</p>
+        </div>
+      </div>
+      <div class="equation">
+        <div>
+          <strong>300</strong>
+          <span>MEMBERS</span>
+        </div>
+        <b aria-hidden="true">×</b>
+        <div>
+          <strong>€59</strong>
+          <span>PER MONTH / TARGET</span>
+        </div>
+        <b aria-hidden="true">≈</b>
+        <div class="equation-total">
+          <strong>€17,700</strong>
+          <span>SHARED MONTHLY BUDGET</span>
+        </div>
+      </div>
+      <div class="budget-details">
+        <p>
+          That budget would fund the infrastructure and the work needed to keep
+          it running.
+        </p>
+        <ul>
+          <li>GPU infrastructure</li>
+          <li>Storage</li>
+          <li>Networking</li>
+          <li>Monitoring</li>
+          <li>Payment processing</li>
+          <li>Operational reserve</li>
+        </ul>
+      </div>
+      <div class="economic-disclaimer">
+        <span class="mono">THE FINE PRINT, UP FRONT.</span>
+        <p>
+          This is the target economic model, not a final price. The final launch
+          price depends on the infrastructure contract we negotiate.
+        </p>
+      </div>
+      <p class="economics-principle">
+        More members should create better economics,
+        <br />
+        <strong>not just higher margins.</strong>
+      </p>
+    </div>
+  </section>
+
+  <section id="capacity" class="section container">
+    <div class="section-heading">
+      <span class="eyebrow section-index">05 / SHARED CAPACITY</span>
+      <div>
+        <h2>
+          Shared doesn’t mean unlimited.
+          <br />
+          <span class="muted">It means thoughtfully managed.</span>
+        </h2>
+      </div>
+    </div>
+    <div class="capacity-grid">
+      <div>
+        <p class="large-copy">
+          300 members.
+          <br />
+          Not 300 simultaneous workloads.
+        </p>
+        <p>
+          The first cluster will initially target approximately 300 members. Not
+          everyone generates tokens at the same time. The goal is fair access to
+          a shared pool, with limits informed by real benchmarks.
+        </p>
+        <p class="small muted">
+          No throughput, latency or availability guarantee is being offered at
+          this stage.
+        </p>
+      </div>
+      <div>
+        <ul class="capacity-list">
+          <li>
+            <span class="mono">01</span>Continuous batching
+          </li>
+          <li>
+            <span class="mono">02</span>Prefix caching
+          </li>
+          <li>
+            <span class="mono">03</span>Fair scheduling
+          </li>
+          <li>
+            <span class="mono">04</span>Usage limits against abuse
+          </li>
+          <li>
+            <span class="mono">05</span>Queues for exceptionally large workloads
+          </li>
+        </ul>
+        <div class="context-note">
+          <span class="mono accent">A NOTE ON LARGE CONTEXT</span>
+          <p>
+            Some models may support contexts such as 1M tokens. These would be
+            fair-use or queued workloads, not the default experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="section container">
+    <div class="section-heading">
+      <span class="eyebrow section-index">06 / ON THE ROADMAP</span>
+      <div>
+        <h2>
+          Your workflow.
+          <br />A different compute layer.
+        </h2>
+        <p>Intended access options. Not available in this MVP.</p>
+      </div>
+    </div>
+    <div class="access-grid">
+      <article class="api-card">
+        <span class="planned-tag">PLANNED</span>
+        <span class="code-symbol" aria-hidden="true">
+          {}
+        </span>
+        <h3>OpenAI-compatible API</h3>
+        <p>
+          Familiar interfaces for the applications and agents you’re already
+          building.
+        </p>
+        <div class="code-preview mono">
+          <span># Future access</span>
+          <br />
+          <span class="accent">client</span>.chat.completions.create(
+          <br />
+          &nbsp;&nbsp;model=
+          <span class="code-string">"community-selected"</span>
+          <br />)
+        </div>
+      </article>
+      <article class="tools-card">
+        <span class="planned-tag">PLANNED</span>
+        <h3>Built for your tools.</h3>
+        <p>Intended integrations, subject to model and client compatibility.</p>
+        <ul class="tool-chips">
+          {[
+            'Claude Code',
+            'OpenCode',
+            'Aider',
+            'Continue',
+            'Cline',
+            'OpenHands',
+            'LangChain',
+            'Agents',
+          ].map((tool) => (
+            <li>{tool}</li>
+          ))}
+        </ul>
+        <div class="web-chat">
+          <span aria-hidden="true">↳</span>
+          <div>
+            <h4>Prefer a conversation?</h4>
+            <p>A web chat is also on the roadmap.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="vote" class="section container">
+    <div class="vote-grid">
+      <div>
+        <span class="eyebrow">07 / COMMUNITY CHOICE</span>
+        <h2>
+          One cluster.
+          <br />
+          Your collective call.
+        </h2>
+        <p>
+          Which model would you prefer? Share your vote when you reserve a seat.
+          The community helps shape what comes next.
+        </p>
+        <a class="text-link" href="#reserve">
+          Make your voice count <span aria-hidden="true">↗</span>
+        </a>
+        <p class="small muted">
+          Votes include all responses, including “maybe” and “no”. They guide
+          the decision; they don’t guarantee a deployment.
+        </p>
+      </div>
+      <div class="vote-panel">
+        <div class="vote-panel-title">
+          <h3>Which model would you prefer?</h3>
+          <span class="mono">LIVE VOTE</span>
+        </div>
+        <div class="vote-bars">
+          {models.map(([key, label]) => (
+            <div class="vote-row">
+              <div>
+                <span>{label}</span>
+                <strong class="mono" data-vote-label={key}>
+                  —
+                </strong>
+              </div>
+              <progress
+                data-vote={key}
+                value="0"
+                max="100"
+                aria-label={`${label} model preference`}
+              ></progress>
+            </div>
+          ))}
+        </div>
+        <p class="vote-footnote" data-vote-status>
+          Loading community votes…
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reserve" class="reserve-section">
+    <div class="container reserve-grid">
+      <div class="reserve-copy">
+        <span class="eyebrow">
+          <span class="signal-dot"></span> EXPRESSION OF INTEREST
+        </span>
+        <h2>
+          Help launch
+          <br />
+          <span>EU-01.</span>
+        </h2>
+        <p class="large-copy">
+          Great infrastructure starts
+          <br />
+          with people who want it.
+        </p>
+        <p>
+          We will only contract the first cluster if enough people want it. Tell
+          us what you’d build, and help shape what comes next.
+        </p>
+        <div class="reservation-terms">
+          <span>~€59/month target</span>
+          <span>No payment today</span>
+          <span>No binding commitment</span>
+        </div>
+        <div class="reserve-bottom mono">
+          <span class="eu-stars" aria-hidden="true">
+            ✳
+          </span>{' '}
+          INDEPENDENT MINDS. EUROPEAN COMPUTE.
+        </div>
+      </div>
+      <div class="form-panel">
+        <form id="reservation-form" data-sitekey={siteKey}>
+          <div class="form-heading">
+            <h3>Reserve my seat</h3>
+            <span class="mono">EU-01 / 001</span>
+          </div>
+          <p class="small muted">
+            A minute of your time. A signal for something bigger.
+          </p>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">
+                Email <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                required
+                placeholder="you@example.com"
+                aria-describedby="email-error"
+              />
+              <span class="field-error" id="email-error"></span>
+            </div>
+            <div class="field">
+              <label for="country">
+                Country <span aria-hidden="true">*</span>
+              </label>
+              <select
+                id="country"
+                name="country"
+                autocomplete="country"
+                required
+                aria-describedby="country-error"
+              >
+                <option value="" disabled selected>
+                  Select country
+                </option>
+                {countries.map(({ code, name }) => (
+                  <option value={code}>{name}</option>
+                ))}
+              </select>
+              <span class="field-error" id="country-error"></span>
+            </div>
+          </div>
+          <fieldset class="interest-field">
+            <legend>
+              Would you join at approximately €59/month?{' '}
+              <span aria-hidden="true">*</span>
+            </legend>
+            <div class="radio-options">
+              {[
+                ['yes', 'Yes, I’m in'],
+                ['maybe', 'Maybe'],
+                ['no', 'No'],
+              ].map(([value, label]) => (
+                <label>
+                  <input
+                    type="radio"
+                    name="would_pay_59"
+                    value={value}
+                    required
+                    aria-describedby="would_pay_59-error"
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+            <span class="field-error" id="would_pay_59-error"></span>
+          </fieldset>
+          <div class="form-row">
+            <div class="field">
+              <label for="use_case">
+                Primary use case <span aria-hidden="true">*</span>
+              </label>
+              <select
+                id="use_case"
+                name="use_case"
+                required
+                aria-describedby="use_case-error"
+              >
+                <option value="" disabled selected>
+                  Select use case
+                </option>
+                <option value="coding">Coding</option>
+                <option value="agents">Agents</option>
+                <option value="api">API</option>
+                <option value="chat">Chat</option>
+                <option value="team">Company / Team</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="field-error" id="use_case-error"></span>
+            </div>
+            <div class="field">
+              <label for="model_vote">
+                Preferred model <span aria-hidden="true">*</span>
+              </label>
+              <select
+                id="model_vote"
+                name="model_vote"
+                required
+                aria-describedby="model_vote-error"
+              >
+                <option value="" disabled selected>
+                  Select model
+                </option>
+                <option value="glm">GLM</option>
+                <option value="kimi">Kimi</option>
+                <option value="qwen">Qwen</option>
+                <option value="community">Let the community decide</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="field-error" id="model_vote-error"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="comment">
+              Anything you want us to know?{' '}
+              <span class="optional">Optional</span>
+            </label>
+            <textarea
+              id="comment"
+              name="comment"
+              rows="3"
+              maxlength="500"
+              placeholder="What would you build with shared compute?"
+              aria-describedby="comment-hint comment-error"
+            ></textarea>
+            <div class="textarea-meta">
+              <span id="comment-hint">
+                Please don’t include sensitive information.
+              </span>
+              <span>
+                <span id="comment-count">0</span>/500
+              </span>
+            </div>
+            <span class="field-error" id="comment-error"></span>
+          </div>
+          <div class="consent-field">
+            <label>
+              <input
+                type="checkbox"
+                id="consent"
+                name="consent"
+                required
+                aria-describedby="consent-error"
+              />
+              <span>
+                I agree that CrowdCompute may store my email and contact me
+                about the launch of this project.
+              </span>
+            </label>
+            <span class="field-error" id="consent-error"></span>
+          </div>
+          <p class="consent-note">
+            This is an expression of interest only. You are not purchasing
+            anything and no payment is collected.{' '}
+            <a href="/privacy/">Privacy policy</a>.
+          </p>
+          <div
+            id="turnstile-widget"
+            role="group"
+            aria-label="Security check"
+          ></div>
+          <p id="turnstileToken-error" class="field-error" role="status"></p>
+          <p id="form-message" class="form-message" role="status" tabindex="-1">
+            {siteKey
+              ? 'Complete the form and security check to register your interest.'
+              : 'Reservations will open once the security check is configured.'}
+          </p>
+          <button
+            class="button button-primary form-submit"
+            id="submit-button"
+            type="submit"
+            disabled
+          >
+            Reserve my seat <span aria-hidden="true">↗</span>
+          </button>
+          <p class="small form-bottom">
+            Only “Yes” responses count toward the 300-member target.
+          </p>
+          <noscript>
+            <p class="form-message">
+              JavaScript is needed to complete the security check and submit
+              this form. You can still read the full proposal without it.
+            </p>
+          </noscript>
+        </form>
+        <div id="success-panel" class="success-panel" hidden tabindex="-1">
+          <span class="success-icon" aria-hidden="true">
+            ✓
+          </span>
+          <span class="eyebrow">INTEREST REGISTERED</span>
+          <h3>You’re in.</h3>
+          <p class="large-copy">EU-01 is one step closer.</p>
+          <p id="success-detail"></p>
+          <div class="success-progress">
+            <span class="mono">CURRENT PROGRESS</span>
+            <strong>
+              <span data-committed>—</span> <small>/ 300</small>
+            </strong>
+            <progress
+              data-progress
+              max="300"
+              value="0"
+              aria-label="Current community progress"
+            ></progress>
+            <p data-stats-status class="small muted"></p>
+          </div>
+          <h4>Help us reach 300.</h4>
+          <p class="small muted">
+            A shared idea goes further when you share it.
+          </p>
+          <button class="button button-primary" id="share-button" type="button">
+            Copy to share <span aria-hidden="true">↗</span>
+          </button>
+          <p id="share-status" role="status" class="small"></p>
+          <textarea
+            id="share-fallback"
+            readonly
+            hidden
+            aria-label="Text to share"
+          >I'm helping launch CrowdCompute EU-01: a community-funded 8×H200 European AI cluster. https://crowdcompute.eu</textarea>
+          <button
+            class="text-link update-response"
+            id="update-response"
+            type="button"
+          >
+            Update my response
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="../scripts/main.ts"></script>
+</Base>

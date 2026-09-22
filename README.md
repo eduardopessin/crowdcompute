@@ -4,7 +4,7 @@
 
 A complete demand-validation MVP for [crowdcompute.eu](https://crowdcompute.eu): a static Astro landing page, a reservation form backed by Cloudflare Pages Functions and D1, Turnstile verification, and live aggregate interest/model-vote statistics.
 
-**This repository is prepared for Cloudflare Pages. It has not been deployed.** No payments, accounts, GPU ownership, AI inference or binding purchases are implemented or implied. The objective is 300 people expressing “yes, at approximately €59/month.” An email plus Turnstile is an expression of interest, not a verified unique human or an enforceable commitment.
+**This repository is deployed to Cloudflare Pages and live at [crowdcompute.eu](https://crowdcompute.eu).** No payments, accounts, GPU ownership, AI inference or binding purchases are implemented or implied. The objective is 300 people expressing “yes, at approximately €59/month.” An email plus Turnstile is an expression of interest, not a verified unique human or an enforceable commitment.
 
 ![CrowdCompute landing page](docs/desktop-preview.png)
 
